@@ -66,10 +66,7 @@ package_version = "1.1.0-1"
 package_name = 'libws2811_%s' % package_version
 
 debian_files = [
-    'DEBIAN/control',
-    'DEBIAN/postinst',
-    'DEBIAN/prerm',
-    'DEBIAN/postrm',
+    'debian/control',
 ]
 
 package_files_desc = [
@@ -89,7 +86,7 @@ for deb_file in debian_files:
     )
 
 package = tools_env.Command('%s.deb' % package_name, package_files,
-                            'cd %s; dpkg-deb --build %s' % (Dir('.').abspath, package_name));
+                            'cd %s; dpkg-buildpackage -b' % (Dir('.').abspath, package_name));
 
 Alias("deb", package)
 
